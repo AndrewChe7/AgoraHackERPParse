@@ -1,0 +1,22 @@
+version: '3.9'
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+  rabbitmq:
+    image: rabbitmq:alpine
+    restart: always
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+      RABBITMQ_DEFAULT_VHOST: /
+  #TODO: django app
+  parsing_microservice:
+    build:
+      context: parsing_microservice
+      dockerfile: Dockerfile
+    command: python main.py
+    

@@ -1,0 +1,8 @@
+parser_id = "0"
+
+[erp]
+name = "erp-0"
+format = "xml"
+
+[rabbitmq]
+host = "localhost"
