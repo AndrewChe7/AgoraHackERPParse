@@ -82,7 +82,7 @@ DATABASES = {
         'NAME': 'agregator',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'localhost',
+        'HOST': 'django_app_db',
         'PORT': '5432',
     }
 }

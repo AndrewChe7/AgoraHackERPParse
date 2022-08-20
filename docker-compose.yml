@@ -1,17 +1,23 @@
 version: '3.3'
 services:
-  nginx:
-    image: nginx
+  nginx_service:
+    restart: always
+    build:
+      context: nginx_service
+      dockerfile: Dockerfile
     ports:
       - "8000:80"
     environment:
-      - NGINX_PORT=80
-  db:
-    image: postgres
+      - NGINX_PORT=8080
+    volumes:
+      - ./django_app:/usr/src/black_hole
+      - ./sock:/sock
+  django_app_db:
     restart: always
-    environment:
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_USER: postgres
+    container_name: django_app_db
+    image: postgres:10.1-alpine
+    volumes:
+      - /app_bd/__data:/var/lib/postgresql/data
   rabbitmq:
     image: rabbitmq:alpine
     restart: always
@@ -25,13 +31,18 @@ services:
       timeout: 30s
       retries: 3
   django_app:
+    restart: always
     build: 
       context: django_app
       dockerfile: Dockerfile
-    command: uwsgi --ini black_hole.uwsgi.ini --http :8000
+    command: python /usr/src/black_hole/manage.py makemigrations --noinput &&
+             python /usr/src/black_hole/manage.py migrate --noinput && python /usr/src/black_hole/manage.py collectstatic && uwsgi --ini /etc/black_hole.uwsgi.ini
     depends_on:
       rabbitmq:
         condition: service_healthy
+    volumes:
+      - ./django_app:/usr/src/black_hole
+      - ./sock:/sock
   parsing_microservice:
     build:
       context: parsing_microservice
