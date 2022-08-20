@@ -10,7 +10,7 @@ def callback(ch, method, properties, body):
     ch.basic_ack(delivery_tag=method.delivery_tag)
 
 def parse_data(data: str) -> dict:
-    return xmltodict.parse(str)
+    return xmltodict.parse(data)
 
 def convert_to_unified_format(data: dict, cfg) -> dict:
     try:

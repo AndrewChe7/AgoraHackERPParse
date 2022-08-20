@@ -79,9 +79,9 @@ WSGI_APPLICATION = 'black_hole.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'agregator',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
+        'NAME': 'django',
+        'USER': 'django',
+        'PASSWORD': 'django',
         'HOST': 'django_app_db',
         'PORT': '5432',
     }
