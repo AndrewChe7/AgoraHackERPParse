@@ -1,5 +1,11 @@
-version: '3.9'
+version: '3.3'
 services:
+  nginx:
+    image: nginx
+    ports:
+      - "8000:80"
+    environment:
+      - NGINX_PORT=80
   db:
     image: postgres
     restart: always
@@ -13,10 +19,14 @@ services:
       RABBITMQ_DEFAULT_USER: admin
       RABBITMQ_DEFAULT_PASS: admin
       RABBITMQ_DEFAULT_VHOST: /
-  #TODO: django app
+  django_app:
+    build: 
+      context: django_app
+      dockerfile: Dockerfile
+    command: uwsgi --ini black_hole.uwsgi.ini --http :8000
   parsing_microservice:
     build:
       context: parsing_microservice
       dockerfile: Dockerfile
     command: python main.py
-    
+

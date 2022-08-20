@@ -1,0 +1,16 @@
+Django==3.0
+django-filter
+django-import-export
+openpyxl
+psycopg2==2.8.6
+requests
+six
+sqlparse
+tablib
+urllib3
+xlrd
+xlwt
+djangorestframework
+markdown
+django-mptt
+django-extra_keywords
