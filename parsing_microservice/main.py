@@ -12,9 +12,39 @@ def callback(ch, method, properties, body):
 def parse_data(data: str) -> dict:
     return xmltodict.parse(str)
 
-def convert_to_unified_format(data: dict) -> dict:
-    #TODO: make converter
-    return {}
+def convert_to_unified_format(data: dict, cfg) -> dict:
+    try:
+        keys_rename_dict = json.loads(cfg['parser']['rename_dict'].replace('\n', '').replace("'", '"'))
+        dict_iter_template = json.loads(cfg['parser']['iter_template_dict'].replace('\n', '').replace("'", '"'))
+    except:
+        print("incorrect .toml file dict data")
+
+    # renaming module
+    def walk_and_rename(dict_to_change: dict, dict_template: dict):
+        for key in dict_template.keys():
+            try:
+                dict_to_change[keys_rename_dict[key]] = dict_to_change.pop(key)
+                if type(dict_to_change[keys_rename_dict[key]]) is list:
+                    for sub_dict in dict_to_change[keys_rename_dict[key]]:
+                        walk_and_rename(sub_dict, dict_template[key])
+                elif type(dict_to_change[keys_rename_dict[key]]) is dict:
+                    walk_and_rename(dict_to_change[keys_rename_dict[key]], dict_template[key])
+                else:
+                    pass
+            except KeyError:
+                print("No key named {} found in file".format(key))
+
+    for key in cfg['parser']['dewrap_keys']:
+        data = data[key]
+
+    for key in cfg['parser']['ignore_keys']:
+        try:
+            data.pop(key)
+        except KeyError:
+            continue
+
+    walk_and_rename(data, dict_iter_template)
+    return data
 
 def main():
     print('Start parsing microservice')

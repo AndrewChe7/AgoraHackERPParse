@@ -8,3 +8,23 @@ format = "xml"
 host = "rabbitmq"
 user = "guest"
 password = "guest"
+
+[parser]
+dewrap_keys = [ 'AgoraMessage' ]
+ignore_keys = [ '@xmlns', '@xmlns:xs', '@xmlns:xsi', '@xsi:type' ]
+rename_dict = '''{'ГруппаНоменклатура': 'NomenclatureGroup', 'Наименование': 'Name',
+                        'ПометкаУдаления': 'DeletionTag', 'Родитель': 'Parent', 'Ссылка': 'Reference',
+                        'ЕдиницыИзмерения': 'MeasurmentUnits', 'Коэффициент': 'Coefficient',
+                        'НаименованиеПолное': 'FullName', 'Номенклатура': 'Nomenclature', 'Артикул': 'Article',
+                        'ЕдиницаХраненияОстатков': 'ResidueStorageUnit', 'Описание': 'Description',
+                        'СтавкаНДС': 'TaxRate', 'ТипНоменклатуры': 'NomenclatureType', 'Файлы': 'Files',
+                        'Строка': 'String', 'Основное': 'Main', 'Путь': 'Path', 'Файл': 'File', 'Штрихкод': 'Barcode',
+                        'ВестиУчетПоХарактеристикам': 'TrackByFeatures'}'''
+iter_template_dict = '''{
+        'ГруппаНоменклатура': {'Наименование': 'dud', 'ПометкаУдаления': 'dud', 'Родитель': 'dud', 'Ссылка': 'dud'},
+        'ЕдиницыИзмерения': {'Строка': {'Коэффициент': 'dud', 'Наименование': 'dud', 'НаименованиеПолное': 'dud', 'Ссылка': 'dud'}},
+        'Номенклатура': {'Артикул': 'dud', 'ВестиУчетПоХарактеристикам': 'dud', 'ЕдиницаХраненияОстатков': 'dud',
+                         'Наименование': 'dud', 'Описание': 'dud', 'ПометкаУдаления': 'dud', 'Родитель': 'dud',
+                         'Ссылка': 'dud', 'СтавкаНДС': 'dud', 'ТипНоменклатуры': 'dud', 'Штрихкод': 'dud',
+                         'Файлы': {'Строка': {'Основное': 'dud', 'Путь': 'dud', 'Файл': 'dud'}}}}'''
+
