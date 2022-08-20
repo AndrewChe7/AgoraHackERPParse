@@ -17,9 +17,14 @@ def convert_to_unified_format(data: dict) -> dict:
     return {}
 
 def main():
+    print('Start parsing microservice')
     with open('config.toml', 'r') as f:
         config = toml.load(f)
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host=config['rabbitmq']['host']))
+    connection = pika.BlockingConnection(
+        pika.ConnectionParameters(host=config['rabbitmq']['host'], 
+        credentials=pika.PlainCredentials(
+            config['rabbitmq']['user'], config['rabbitmq']['password']
+            )))
     channel = connection.channel()
     queue_name = 'parser_queue_{}'.format(config['parser_id'])
     channel.queue_declare(queue=queue_name)

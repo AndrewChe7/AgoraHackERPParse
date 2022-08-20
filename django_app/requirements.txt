@@ -2,7 +2,7 @@ Django==3.0
 django-filter
 django-import-export
 openpyxl
-psycopg2==2.8.6
+psycopg2-binary
 requests
 six
 sqlparse

@@ -5,4 +5,6 @@ name = "erp-0"
 format = "xml"
 
 [rabbitmq]
-host = "localhost"
+host = "rabbitmq"
+user = "guest"
+password = "guest"

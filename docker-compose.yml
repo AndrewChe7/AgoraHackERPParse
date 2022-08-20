@@ -16,17 +16,27 @@ services:
     image: rabbitmq:alpine
     restart: always
     environment:
-      RABBITMQ_DEFAULT_USER: admin
-      RABBITMQ_DEFAULT_PASS: admin
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
       RABBITMQ_DEFAULT_VHOST: /
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 30s
+      timeout: 30s
+      retries: 3
   django_app:
     build: 
       context: django_app
       dockerfile: Dockerfile
     command: uwsgi --ini black_hole.uwsgi.ini --http :8000
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
   parsing_microservice:
     build:
       context: parsing_microservice
       dockerfile: Dockerfile
     command: python main.py
-
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
