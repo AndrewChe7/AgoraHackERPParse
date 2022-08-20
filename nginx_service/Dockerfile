@@ -1,4 +1,5 @@
 FROM nginx
+RUN mkdir /usr/src/black_hole/
 RUN touch /usr/src/black_hole/black_hole.sock
 
 COPY ./uwsgi_params /etc/nginx/uwsgi_params
