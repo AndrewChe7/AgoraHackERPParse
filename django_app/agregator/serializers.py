@@ -1,6 +1,3 @@
-from dataclasses import field
-from pyexpat import model
-from unicodedata import category
 from rest_framework import serializers
 from .models import Category, MeasureUnit, Product
 
@@ -15,8 +12,8 @@ class MeasureUnitSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ProductSerializer(serializers.ModelSerializer):
+    category = CategorySerializer(many=True, required=False)
+    measure_unit = MeasureUnitSerializer(many=False, required=False)
     class Meta:
         model = Product
         fields = '__all__'
-
-        
