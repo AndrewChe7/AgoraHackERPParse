@@ -9,8 +9,6 @@ services:
       - "8000:80"
     environment:
       - NGINX_PORT=80
-    volumes:
-      - ./django_app:/usr/src/black_hole
     depends_on:
       - django_app
   django_app_db:
@@ -26,8 +24,6 @@ services:
       interval: 30s
       timeout: 30s
       retries: 3
-    volumes:
-      - ./app_bd/__data:/var/lib/postgresql/data
   rabbitmq:
     image: rabbitmq:alpine
     restart: always
@@ -50,8 +46,6 @@ services:
         condition: service_healthy
       django_app_db:
         condition: service_healthy
-    volumes:
-      - ./django_app:/usr/src/black_hole
   parsing_microservice:
     build:
       context: parsing_microservice
@@ -60,6 +54,3 @@ services:
     depends_on:
       rabbitmq:
         condition: service_healthy
-      # python /usr/src/black_hole/manage.py makemigrations --noinput &&
-      # python /usr/src/black_hole/manage.py migrate --noinput &&
-      # python /usr/src/black_hole/manage.py collectstatic --noinput &&

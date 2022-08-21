@@ -1,7 +1,6 @@
 FROM nginx
 RUN mkdir /usr/src/black_hole/
 RUN touch /usr/src/black_hole/black_hole.sock
-
 COPY ./uwsgi_params /etc/nginx/uwsgi_params
 COPY ./nginx.conf /etc/nginx/nginx.conf
 COPY ./django.nginx.conf /etc/nginx/sites-available/django.nginx.conf
