@@ -10,6 +10,9 @@ user = "guest"
 password = "guest"
 
 [parser]
+schema_path = "schema_example_long.xsd"
+old_header = '''<AgoraMessage xmlns="http://www.agora.centrobit.ru" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="AgoraMessage">'''
+new_header = '''<AgoraMessage>'''
 dewrap_keys = [ 'AgoraMessage' ]
 ignore_keys = [ '@xmlns', '@xmlns:xs', '@xmlns:xsi', '@xsi:type' ]
 rename_dict = '''{'ГруппаНоменклатура': 'NomenclatureGroup', 'Наименование': 'Name',
@@ -27,4 +30,3 @@ iter_template_dict = '''{
                          'Наименование': 'dud', 'Описание': 'dud', 'ПометкаУдаления': 'dud', 'Родитель': 'dud',
                          'Ссылка': 'dud', 'СтавкаНДС': 'dud', 'ТипНоменклатуры': 'dud', 'Штрихкод': 'dud',
                          'Файлы': {'Строка': {'Основное': 'dud', 'Путь': 'dud', 'Файл': 'dud'}}}}'''
-

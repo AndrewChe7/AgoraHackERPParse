@@ -30,8 +30,11 @@ services:
       timeout: 30s
       retries: 3
   rabbitmq:
-    image: rabbitmq:alpine
+    image: rabbitmq:management-alpine
     restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest

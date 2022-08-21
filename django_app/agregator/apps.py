@@ -3,6 +3,7 @@ from django.conf import settings
 import threading
 import pika
 import json
+#from black_hole import tasks
 
 def create_product(json_information):
     pass

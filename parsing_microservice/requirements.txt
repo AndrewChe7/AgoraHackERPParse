@@ -1,3 +1,4 @@
 pika
 toml
 xmltodict
+xmlschema

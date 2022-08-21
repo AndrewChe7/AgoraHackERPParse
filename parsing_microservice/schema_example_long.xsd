@@ -1,0 +1,66 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="AgoraMessage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ГруппаНоменклатура" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="Ссылка"/>
+              <xs:element type="xs:string" name="Родитель"/>
+              <xs:element type="xs:string" name="Наименование"/>
+              <xs:element type="xs:byte" name="ПометкаУдаления"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ЕдиницыИзмерения">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Строка">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="Наименование"/>
+                    <xs:element type="xs:string" name="Ссылка"/>
+                    <xs:element type="xs:string" name="НаименованиеПолное"/>
+                    <xs:element type="xs:byte" name="Коэффициент"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Номенклатура" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="Ссылка"/>
+              <xs:element type="xs:string" name="Родитель"/>
+              <xs:element type="xs:byte" name="ПометкаУдаления"/>
+              <xs:element type="xs:string" name="Артикул"/>
+              <xs:element type="xs:string" name="Наименование"/>
+              <xs:element type="xs:string" name="СтавкаНДС"/>
+              <xs:element type="xs:string" name="Описание"/>
+              <xs:element type="xs:string" name="ЕдиницаХраненияОстатков"/>
+              <xs:element type="xs:byte" name="ВестиУчетПоХарактеристикам"/>
+              <xs:element type="xs:string" name="ТипНоменклатуры"/>
+              <xs:element type="xs:long" name="Штрихкод"/>
+              <xs:element name="Файлы">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Строка">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="Файл"/>
+                          <xs:element type="xs:string" name="Путь"/>
+                          <xs:element type="xs:byte" name="Основное"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
